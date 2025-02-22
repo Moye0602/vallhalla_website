@@ -1,21 +1,4 @@
-async function fetchAccountData() {
-    try {
-        const accounts = [];
-        for (let accountNumber = 0; accountNumber < 5; accountNumber++) {
-            const account = await loadPaperAccount(accountNumber);
-            const history = await loadPaperHistoryMulti('2024-01-01', new Date().toISOString().slice(0, 10), accountNumber);
 
-            console.log(`Account ${accountNumber} data:`, account); // Log account data
-            console.log(`Account ${accountNumber} history:`, history); // Log history data
-
-            accounts.push({ account, history, accountNumber });
-        }
-        processAndDisplayData(accounts);
-    } catch (error) {
-        console.error("Error fetching account data:", error);
-    }
-}
-fetchAccountData();
 
 
 async function loadPaperAccount(accountNumber) {
@@ -98,16 +81,7 @@ async function loadPaperHistoryMulti(startDate, endDate, accountNumber) {
     }
 }
 
-async function fetchAccountData() {
-    // Main function to fetch and process account data
-    const accounts = [];
-    for (let accountNumber = 0; accountNumber < 5; accountNumber++) {
-        const account = await loadPaperAccount(accountNumber);
-        const history = await loadPaperHistoryMulti('2024-01-01', new Date().toISOString().slice(0, 10), accountNumber);
-        accounts.push({ account, history, accountNumber });
-    }
-    processAndDisplayData(accounts);
-}
+
 
 function processAndDisplayData(accounts) {
     // Process and display account data
@@ -132,6 +106,24 @@ function processAccountData(accountData) {
 function createAccountSummaryHTML(data) {
     // Create HTML elements to display account summary
     // ... (Generate HTML based on data)
+}
+
+async function fetchAccountData() {
+    try {
+        const accounts = [];
+        for (let accountNumber = 0; accountNumber < 5; accountNumber++) {
+            const account = await loadPaperAccount(accountNumber);
+            const history = await loadPaperHistoryMulti('2024-01-01', new Date().toISOString().slice(0, 10), accountNumber);
+
+            console.log(`Account ${accountNumber} data:`, account); // Log account data
+            console.log(`Account ${accountNumber} history:`, history); // Log history data
+
+            accounts.push({ account, history, accountNumber });
+        }
+        processAndDisplayData(accounts);
+    } catch (error) {
+        console.error("Error fetching account data:", error);
+    }
 }
 
 fetchAccountData();

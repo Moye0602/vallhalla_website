@@ -1,0 +1,21 @@
+{
+    "time_stamp": "2025-02-22 09:20:54.216748",
+    "exit_dictionary": {
+        "UNG": {
+            "eneteredAt": "2025-02-22",
+            "exit": "take profit",
+            "exit price": 21.64,
+            "exit type": "+10%",
+            "$P/L": 4721.15,
+            "%P/L": 15.29
+        },
+        "VUSB": {
+            "eneteredAt": "2025-02-22 06:45:01",
+            "exit": "PDT Locked",
+            "exit price": 49.796244875,
+            "exit type": "pdt Sell",
+            "$P/L": 0.8,
+            "%P/L": 0.002
+        }
+    }
+}
