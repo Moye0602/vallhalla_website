@@ -1,63 +1,20 @@
 async function fetchAccountData() {
     try {
-        // Fetch the main account data (assuming you have a file like accounts.json)
-        const response = await fetch('accounts.json');
-        const accounts = await response.json();
+        const accounts = [];
+        for (let accountNumber = 0; accountNumber < 5; accountNumber++) {
+            const account = await loadPaperAccount(accountNumber);
+            const history = await loadPaperHistoryMulti('2024-01-01', new Date().toISOString().slice(0, 10), accountNumber);
 
-        const accountSummariesDiv = document.getElementById('account-summaries');
+            console.log(`Account ${accountNumber} data:`, account); // Log account data
+            console.log(`Account ${accountNumber} history:`, history); // Log history data
 
-        accounts.forEach(account => {
-            const accountSummaryDiv = document.createElement('div');
-            accountSummaryDiv.classList.add('account-summary');
-
-            // Construct the HTML content for each account summary
-            accountSummaryDiv.innerHTML = `
-                <h2>Account Number: ${account.number}</h2>
-                <p>Time Delay: ${account.timeDelay} minutes | Days: ${account.days}</p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>$ Gain</th>
-                            <th>$ Loss</th>
-                            <th>Sum $</th>
-                            <th>Min $</th>
-                            <th>Day % Gain</th>
-                            <th>% Loss</th>
-                            <th>% Tot Gain $</th>
-                            <th>Sold Ratio</th>
-                            <th>Result</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Global</td>
-                            <td>${account.globalGain}</td>
-                            <td>${account.globalLoss}</td>
-                            <td>${account.sum}</td>
-                            <td>${account.min}</td>
-                            <td>${account.dayGain}</td>
-                            <td>${account.loss}</td>
-                            <td>${account.totGain}</td>
-                            <td>${account.soldRatio}</td>
-                            <td>${account.result}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>Profit Factor Win Positions: ${account.profitFactor}</p>
-                <p>Win Equity Paper Holdings: ${account.winEquity}</p>
-                <p>Paper Value: ${account.paperValue}</p>
-                <p>Cash: ${account.cash}</p>
-                <p>Account Value: ${account.acntValue}</p>
-            `;
-
-            accountSummariesDiv.appendChild(accountSummaryDiv);
-        });
+            accounts.push({ account, history, accountNumber });
+        }
+        processAndDisplayData(accounts);
     } catch (error) {
-        console.error('Error fetching account data:', error);
+        console.error("Error fetching account data:", error);
     }
 }
-
 fetchAccountData();
 
 
