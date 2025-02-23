@@ -1,0 +1,167 @@
+{
+    "Saved_at": "2025-02-22 09:57:51.254739",
+    "cash": 8.64,
+    "metrics": {
+        "account value": 26263.82,
+        "account equity cur": 26255.18,
+        "account equity buy": 25853.22,
+        "account roi": 1.555
+    },
+    "acnt": {
+        "CTLT": {
+            "price": 63.48,
+            "average_buy_price": 61.56,
+            "quantity": 6,
+            "buy type": "KC",
+            "equity": 380.88,
+            "equity_change": 11.52,
+            "percent_change": 3.119,
+            "intraday_percent_change": 0,
+            "peakChange": 8.315,
+            "stoploss": {
+                "eneteredAt": "2024-12-18",
+                "stopPrice": 62.95,
+                "duration": "Good_till_cancel",
+                "P/L": {
+                    "$": 8.34,
+                    "%": 2.26,
+                    "P/L": "Profit Locked",
+                    "exit type": "BBands"
+                }
+            },
+            "buyDate": "2025-02-17",
+            "updated_at": "2025-02-17",
+            "buyTime": "09:41:38",
+            "account_percent": 0.0145,
+            "weighted ROI": 4.523
+        },
+        "UNG": {
+            "price": 22.0,
+            "average_buy_price": 18.77,
+            "quantity": 33,
+            "buy type": "BBands",
+            "equity": 726.0,
+            "equity_change": 106.59,
+            "percent_change": 17.208,
+            "intraday_percent_change": 0,
+            "peakChange": 21.577,
+            "stoploss": {
+                "eneteredAt": "2025-02-20",
+                "stopPrice": 21.22,
+                "duration": "Good_till_cancel",
+                "P/L": {
+                    "$": 80.85,
+                    "%": 13.05,
+                    "P/L": "Profit Locked",
+                    "exit type": "+10%"
+                }
+            },
+            "buyDate": "2025-02-12",
+            "updated_at": "2025-02-12",
+            "buyTime": "13:07:21",
+            "account_percent": 0.0277,
+            "weighted ROI": 47.666
+        },
+        "TW": {
+            "price": 134.99,
+            "average_buy_price": 132.02,
+            "quantity": 100,
+            "buy type": "KC",
+            "equity": 13499.0,
+            "equity_change": 297.0,
+            "percent_change": 2.25,
+            "intraday_percent_change": 0,
+            "peakChange": 2.25,
+            "stoploss": {
+                "eneteredAt": "2025-02-22 09:57:51",
+                "stopPrice": 132.76261250000002,
+                "duration": "Good_for_Day",
+                "P/L": {
+                    "$": 74.26,
+                    "%": 0.562,
+                    "P/L": "PDT Locked",
+                    "exit type": "pdt Sell"
+                }
+            },
+            "buyDate": "2025-02-21",
+            "updated_at": "2025-02-21",
+            "buyTime": "10:30:52",
+            "account_percent": 0.5141,
+            "weighted ROI": 115.672
+        },
+        "TIP": {
+            "price": 108.9,
+            "average_buy_price": 109.0322,
+            "quantity": 100,
+            "buy type": "BBands",
+            "equity": 10890.0,
+            "equity_change": -13.22,
+            "percent_change": -0.121,
+            "intraday_percent_change": 0,
+            "peakChange": 0.081,
+            "stoploss": {
+                "eneteredAt": "2025-02-22 09:57:51",
+                "stopPrice": 109.05427902050002,
+                "duration": "Good_for_Day",
+                "P/L": {
+                    "$": 2.21,
+                    "%": 0.02,
+                    "P/L": "PDT Locked",
+                    "exit type": "pdt Sell"
+                }
+            },
+            "buyDate": "2025-02-21",
+            "updated_at": "2025-02-21",
+            "buyTime": "12:54:52",
+            "account_percent": 0.4148,
+            "weighted ROI": -5.019
+        },
+        "ICSH": {
+            "price": 50.6199,
+            "average_buy_price": 50.615,
+            "quantity": 15,
+            "buy type": "BBands",
+            "equity": 759.3,
+            "equity_change": 0.07,
+            "percent_change": 0.01,
+            "intraday_percent_change": 0,
+            "peakChange": 0.01,
+            "stoploss": {
+                "eneteredAt": "2025-02-22 09:57:51",
+                "stopPrice": 50.616265375,
+                "duration": "Good_for_Day",
+                "P/L": {
+                    "$": 0.02,
+                    "%": 0.002,
+                    "P/L": "PDT Locked",
+                    "exit type": "pdt Sell"
+                }
+            },
+            "buyDate": "2025-02-21",
+            "updated_at": "2025-02-21",
+            "buyTime": "14:41:22",
+            "account_percent": 0.0289,
+            "weighted ROI": 0.029
+        }
+    },
+    "acnt_analytics": {
+        "2025-02-20": {
+            "equity": 6920.29,
+            "roi": 5.52,
+            "sold": 193.0,
+            "account value": 26000.0,
+            "plOpen": 169.02,
+            "plDay": 60.15,
+            "return": 362.02
+        },
+        "2025-02-21": {
+            "equity": 26286.06,
+            "roi": 1.674,
+            "sold": 30.88,
+            "account value": 26263.82,
+            "plOpen": 401.96,
+            "plDay": 270.98,
+            "return": 432.84
+        }
+    }
+}
