@@ -1,11 +1,10 @@
-
-
-
-async function loadPaperAccount(accountNumber) {
+async function loadAccount(accountNumber=null) {
     try {
-        
-        console.log("source file:",`/Paper/${accountNumber}_paper_acnt.json`)
-        const response = await fetch(`/Paper/${accountNumber}_paper_acnt.json`); // Corrected path
+        if (typeof accountNumber=== "number"){
+            const response = await fetch(`/Paper/${accountNumber}_paper_acnt.json`); // Corrected path
+        }else if (accountNumber === "Live"){
+            const response = await fetch(`/Live/Live_Account.json`); // Corrected path
+        }
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -13,16 +12,20 @@ async function loadPaperAccount(accountNumber) {
         return data;
     } catch (error) {
 
-        console.error(`Error loading account data for account ${accountNumber}:`, error);
+        console.error(`Error loading account data for live account:`, error);
         return null;
     }
 }
 
 async function combineMonthlyLogs(accountNumber) {
     try {
-        const response = await fetch(`/Paper/account_${accountNumber}`); // Corrected path
+        if (typeof accountNumber=== "number"){
+            const response = await fetch(`/Paper/account_${accountNumber}`); // Corrected path
+        }else if (accountNumber === "Live"){
+            const response = await fetch(`/Live/Live_Account`); // Corrected path
+        };
         if (!response.ok) {
-            throw new Error(`Failed to fetch directory listing from /Paper/account_${accountNumber}: ${response.status} NOT FOUND`);
+            throw new Error(`Failed to fetch directory listing from account name ${accountNumber}: ${response.status} NOT FOUND`);
         }
         const text = await response.text();
         // Assuming your directory listing is some text format that you need to parse.
@@ -31,7 +34,13 @@ async function combineMonthlyLogs(accountNumber) {
 
         let combinedLogs = [];
         for (const file of files) {
-            const logResponse = await fetch(`/Paper/account_${accountNumber}/${file}`); // Corrected path
+            if (accountNumber!== "number"){
+                // path to paper accounts
+                const logResponse = await fetch(`/Paper/account_${accountNumber}/${file}`); 
+            }else {
+                // path to live account
+                const logResponse = await fetch(`/Live/Live_Account/${file}`); 
+            };
             if (!logResponse.ok) {
                 console.error(`Failed to fetch log file ${file}`);
                 continue;
@@ -46,39 +55,45 @@ async function combineMonthlyLogs(accountNumber) {
     }
 }
 
-async function loadPaperHistoryMulti(accountNumber) {
+async function loadHistoryMulti(accountNumber) {
     try {
         const combinedLogs = await combineMonthlyLogs(accountNumber);
         return combinedLogs;
     } catch (error) {
-        console.error("Error loading paper history:", error);
+        console.error("Error loading history:", error);
         return null;
     }
 }
 
-async function fetchAccountData(accountNumber) {
+async function fetchAccountData(accountType="Paper",accountNumber=null) {
     try {
-        const accountData = await loadPaperAccount(accountNumber);
-        const historyData = await loadPaperHistoryMulti(accountNumber);
+        if (accountType=="Live"  && !accountNumber){
+            accountNumber=accountType};
+        const accountData = await loadAccount(accountNumber);
+        const historyData = await loadHistoryMulti(accountNumber);
 
-        return {
-            account: accountData,
-            history: historyData,
-        };
-    } catch (error) {
+            return {
+                account: accountData,
+                history: historyData,
+            };
+        
+    }catch (error) {
         console.error("Error fetching account data:", error);
         return null;
     }
 }
 // Example usage (adjust based on your actual HTML elements and triggers)
 async function loadAndDisplayData(accountNumber) {
-    const data = await fetchAccountData(accountNumber);
-    if (data) {
-        // Example: Display data in HTML elements
-        console.log("account Data:", data.account);
-        console.log("history Data:", data.history);
+
+        const data = await fetchAccountData(accountNumber);
+        if (data) {
+            // Example: Display data in HTML elements
+            console.log("account Data:", data.account);
+            console.log("history Data:", data.history);
+        }
+
     }
-}
+
 
 function processAndDisplayData(accounts) {
     // Process and display account data
@@ -105,22 +120,6 @@ function createAccountSummaryHTML(data) {
     // ... (Generate HTML based on data)
 }
 
-// async function fetchAccountData() {
-//     try {
-//         const accounts = [];
-//         for (let accountNumber = 0; accountNumber < 5; accountNumber++) {
-//             const account = await loadPaperAccount(accountNumber);
-//             const history = await loadPaperHistoryMulti('2024-01-01', new Date().toISOString().slice(0, 10), accountNumber);
 
-//             console.log(`Account ${accountNumber} data:`, account); // Log account data
-//             console.log(`Account ${accountNumber} history:`, history); // Log history data
 
-//             accounts.push({ account, history, accountNumber });
-//         }
-//         processAndDisplayData(accounts);
-//     } catch (error) {
-//         console.error("Error fetching account data:", error);
-//     }
-// }
-
-// fetchAccountData(0);// test case
+fetchAccountData("Live");// test case
