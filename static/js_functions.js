@@ -1,10 +1,11 @@
 async function loadAccount(accountNumber=null) {
     try {
         if (typeof accountNumber=== "number"){
-            const response = await fetch(`/Paper/${accountNumber}_paper_acnt.json`); // Corrected path
+            accountSource = `/Paper/${accountNumber}_paper_acnt.json`
         }else if (accountNumber === "Live"){
-            const response = await fetch(`/Live/Live_Account.json`); // Corrected path
+            accountSource = `/Live/Live_Account.json`;
         }
+        const response = await fetch(accountSource); // Corrected path
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -20,10 +21,11 @@ async function loadAccount(accountNumber=null) {
 async function combineMonthlyLogs(accountNumber) {
     try {
         if (typeof accountNumber=== "number"){
-            const response = await fetch(`/Paper/account_${accountNumber}`); // Corrected path
+            const accountSource= `/Paper/account_${accountNumber}`;
         }else if (accountNumber === "Live"){
-            const response = await fetch(`/Live/Live_Account`); // Corrected path
+            const accountSource= `/Live/Live_Account`; // Corrected path
         };
+        const response = await fetch(accountSource); // Corrected path
         if (!response.ok) {
             throw new Error(`Failed to fetch directory listing from account name ${accountNumber}: ${response.status} NOT FOUND`);
         }
@@ -33,14 +35,14 @@ async function combineMonthlyLogs(accountNumber) {
         const files = text.split('\n').filter(line => line.endsWith('.log')); // Example: filter for .log files
 
         let combinedLogs = [];
+        if (accountNumber!== "number"){
+            accountSource = `/Live/Live_Account`
+        }else {
+            accountSource = `/Paper/account_${accountNumber}`
+        };
         for (const file of files) {
-            if (accountNumber!== "number"){
-                // path to paper accounts
-                const logResponse = await fetch(`/Paper/account_${accountNumber}/${file}`); 
-            }else {
-                // path to live account
-                const logResponse = await fetch(`/Live/Live_Account/${file}`); 
-            };
+            // path to paper accounts
+            const logResponse = await fetch(`${accountSource}/${file}`); 
             if (!logResponse.ok) {
                 console.error(`Failed to fetch log file ${file}`);
                 continue;
