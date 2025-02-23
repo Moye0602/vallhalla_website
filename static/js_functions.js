@@ -123,4 +123,4 @@ function createAccountSummaryHTML(data) {
 //     }
 // }
 
-fetchAccountData(0);
+// fetchAccountData(0);// test case

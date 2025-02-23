@@ -18,5 +18,11 @@ def serve_live_files(filename):
     live_dir = os.path.join(app.root_path, 'PaLiveper')
     return send_from_directory(live_dir, filename)
 
+@app.route('/account/<account_id>')
+def account_page(account_id):
+    # Fetch account data based on account_id
+    account_data = get_account_data(account_id)  # Replace with your data retrieval logic
+    return render_template('account.html', account=account_data)
+
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
